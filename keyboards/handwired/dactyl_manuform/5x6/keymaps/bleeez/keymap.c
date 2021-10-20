@@ -1,27 +1,68 @@
 #include QMK_KEYBOARD_H
+#include <stdio.h>
+#include "keymap_german.h"
 
 #define _QWERTY 0
 #define _LOWER 1
 #define _RAISE 2
 #define _ADJUST 3
 
-#define RAISE MO(_RAISE)
+#define RAI_ENT LT(_RAISE, KC_ENT)
 #define LOWER MO(_LOWER)
 #define ADJUST MO(_ADJUST)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTY] = LAYOUT_5x6(
-        KC_ESC , KC_1  , KC_2  , KC_3  , KC_4  , KC_5  ,                         KC_6  , KC_7  , KC_8  , KC_9  , KC_0  ,KC_BSPC,
-        KC_TAB , KC_Q  , KC_W  , KC_E  , KC_R  , KC_T  ,                         KC_Y  , KC_U  , KC_I  , KC_O  , KC_P  ,KC_MINS,
-        KC_LSFT, KC_A  , KC_S  , KC_D  , KC_F  , KC_G  ,                         KC_H  , KC_J  , KC_K  , KC_L  ,KC_SCLN,KC_QUOT,
-        KC_LCTL, KC_Z  , KC_X  , KC_C  , KC_V  , KC_B  ,                         KC_N  , KC_M  ,KC_COMM,KC_DOT ,KC_SLSH,KC_BSLASH,
-                         KC_LBRC,KC_RBRC,                                                       KC_PLUS, KC_EQL,
-                                         RAISE,   KC_SPC,                        KC_ENT, LOWER,
-                                         KC_TAB, KC_HOME,                        KC_END,  KC_DEL,
-                                         KC_BSPC, KC_GRV,                        KC_LGUI, KC_LALT
+        KC_ESC , KC_1  , KC_2  , KC_3  , KC_4  , KC_5  ,                         KC_6  , KC_7  , KC_8  , KC_9  , KC_0  ,DE_SS,
+        KC_TAB , KC_Q  , KC_W  , KC_E  , KC_R  , KC_T  ,                         DE_Z  , KC_U  , KC_I  , KC_O  , KC_P  ,DE_UDIA,
+        KC_ESC , KC_A  , KC_S  , KC_D  , KC_F  , KC_G  ,                         KC_H  , KC_J  , KC_K  , KC_L  ,DE_ODIA,DE_ADIA,
+        KC_LSFT, DE_Y  , KC_X  , KC_C  , KC_V  , KC_B  ,                         KC_N  , KC_M  ,KC_COMM,KC_DOT ,DE_MINS,KC_RSFT,
+                        KC_LGUI,KC_LALT,                                                        KC_RGUI,_______,
+                                         LOWER , KC_SPC,                         KC_BSPC,RAI_ENT,
+                                        KC_LCTL, KC_DEL,                         KC_ENT, ADJUST ,
+                                        KC_HOME,KC_CALC,/*CALC=RPI-KVM-Switch*/  KC_END, KC_RALT
     ),
 
+    /*
+    // Programming Overview
     [_LOWER] = LAYOUT_5x6(
+          KC_F12 , KC_F1 , KC_F2 , KC_F3 , KC_F4 , KC_F5 ,                        KC_F6  , KC_F7 , KC_F8 , KC_F9 ,KC_F10 ,KC_F11 ,
+          _______,   <   ,   [   ,   {   ,   (   ,_______,                        _______,   )   ,   }   ,   ]   ,   >   ,_______,
+          _______,   ~   ,   '   ,   "   ,   =   ,_______,                        KC_LEFT,KC_DOWN, KC_UP ,KC_RGHT,_______,_______,
+          _______,   |   ,   \   ,   /   ,   #   ,_______,                        _______,_______,_______,_______,_______,_______,
+                          _______,_______,                                                        _______,_______,
+                                          _______,_______,                        _______,_______,
+                                          _______,_______,                        _______,_______,
+                                          _______,_______,                        _______,_______
+    ),
+    */
+
+    /*
+
+    [_LOWER] = LAYOUT_5x6(
+          KC_F12 , KC_F1 , KC_F2 , KC_F3 , KC_F4 , KC_F5 ,                        KC_F6  , KC_F7 , KC_F8 , KC_F9 ,KC_F10 ,KC_F11 ,
+          _______,DE_LABK,DE_LBRC,DE_LCBR,DE_LPRN,_______,                        _______,KC_RCBR,DE_RBRC,DE_RABK,_______,
+          _______,DE_TILD,DE_QUOT,DE_DQUO,DE_EQL ,_______,                        KC_LEFT,KC_DOWN, KC_UP ,KC_RGHT,_______,_______,
+          _______,DE_PIPE,DE_BSLS,DE_SLSH,DE_HASH,_______,                        _______,_______,_______,_______,_______,_______,
+                          _______,_______,                                                        _______,_______,
+                                          _______,_______,                        _______,_______,
+                                          _______,_______,                        _______,_______,
+                                          _______,_______,                        _______,_______
+    ), */
+
+    //OSX
+    [_LOWER] = LAYOUT_5x6(
+          KC_F12 , KC_F1 , KC_F2 , KC_F3 , KC_F4 , KC_F5 ,                        KC_F6  , KC_F7 , KC_F8 , KC_F9 ,KC_F10 ,KC_F11 ,
+          _______, KC_GRV,A(DE_5),A(DE_8),S(DE_8),_______,                        _______,S(DE_9),A(DE_9),A(DE_6),S(KC_GRV),_______,
+          _______,A(DE_N),S(DE_HASH),S(DE_2),S(DE_0),_______,                     KC_LEFT,KC_DOWN, KC_UP ,KC_RGHT,_______,_______,
+          _______,A(DE_7),S(A(DE_7)),S(DE_7),KC_NUHS,_______,                     _______,_______,_______,_______,_______,_______,
+                          _______,_______,                                                        _______,_______,
+                                          _______,_______,                        _______,_______,
+                                          _______,_______,                        _______,_______,
+                                          _______,_______,                        _______,_______
+    ),
+
+    [_RAISE] = LAYOUT_5x6(
         KC_TILD,KC_EXLM, KC_AT ,KC_HASH,KC_DLR ,KC_PERC,                        KC_CIRC,KC_AMPR,KC_ASTR,KC_LPRN,KC_RPRN,KC_DEL,
         _______,_______,_______,_______,_______,KC_LBRC,                        KC_RBRC, KC_P7 , KC_P8 , KC_P9 ,_______,KC_PLUS,
         _______,KC_HOME,KC_PGUP,KC_PGDN,KC_END ,KC_LPRN,                        KC_RPRN, KC_P4 , KC_P5 , KC_P6 ,KC_MINS,KC_PIPE,
@@ -33,22 +74,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     ),
 
-    [_RAISE] = LAYOUT_5x6(
-          KC_F12 , KC_F1 , KC_F2 , KC_F3 , KC_F4 , KC_F5 ,                        KC_F6  , KC_F7 , KC_F8 , KC_F9 ,KC_F10 ,KC_F11 ,
-          _______,_______,_______,_______,_______,KC_LBRC,                        KC_RBRC,_______,KC_NLCK,KC_INS ,KC_SLCK,KC_MUTE,
-          _______,KC_LEFT,KC_UP  ,KC_DOWN,KC_RGHT,KC_LPRN,                        KC_RPRN,KC_MPRV,KC_MPLY,KC_MNXT,_______,KC_VOLU,
-          _______,_______,_______,_______,_______,_______,                        _______,_______,_______,_______,_______,KC_VOLD,
-                          _______,_______,                                                        KC_EQL ,_______,
-                                          _______,_______,                        _______,_______,
-                                          _______,_______,                        _______,_______,
-                                          _______,_______,                        _______,_______
-    ),
-
     [_ADJUST] = LAYOUT_5x6(
           KC_F12 , KC_F1 , KC_F2 , KC_F3 , KC_F4 , KC_F5 ,                        KC_F6  , KC_F7 , KC_F8 , KC_F9 ,KC_F10 ,KC_F11 ,
-          _______,_______,_______,_______,_______,KC_LBRC,                        KC_RBRC,_______,KC_NLCK,KC_INS ,KC_SLCK,KC_MUTE,
-          _______,KC_LEFT,KC_UP  ,KC_DOWN,KC_RGHT,KC_LPRN,                        KC_RPRN,KC_MPRV,KC_MPLY,KC_MNXT,_______,KC_VOLU,
-          _______,_______,_______,_______,_______,_______,                        _______,_______,_______,_______,_______,KC_VOLD,
+          _______,_______,_______,_______,_______,KC_LBRC,                        _______,KC_MUTE,KC_NLCK,KC_INS ,KC_SLCK,_______,
+          _______,KC_LEFT,KC_UP  ,KC_DOWN,KC_RGHT,KC_LPRN,                        _______,KC_VOLU,KC_MPLY,KC_MNXT,_______,_______,
+          _______,_______,_______,_______,_______,_______,                        _______,KC_VOLD,_______,_______,_______,_______,
                           _______,_______,                                                        KC_EQL ,_______,
                                           _______,_______,                        _______,_______,
                                           _______,_______,                        _______,_______,
@@ -61,9 +91,13 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return OLED_ROTATION_90;
 }
 
+bool wpm_keycode_user(uint16_t keycode) {
+    return true;
+}
+
 // 5x3 Logos
 
-void render_corne_logo(void) {
+void render_sun_logo(void) {
     static const char PROGMEM font_logo[16] = {0x80, 0x81, 0x82, 0x83, 0x84, 0xa0, 0xa1, 0xa2, 0xa3, 0xa4, 0xc0, 0xc1, 0xc2, 0xc3, 0xc4, 0};
     oled_write_P(font_logo, false);
 };
@@ -116,6 +150,13 @@ void render_prompt(void) {
     }
 };
 
+void render_wpm(void) {
+	char buf[5];
+	oled_write_ln(" WPM", false);
+    sprintf(buf, " %03d", get_current_wpm());
+	oled_write_ln(buf, false);
+}
+
 // 5x1 Layer indicator
 
 void render_layer(void) {
@@ -154,25 +195,6 @@ void render_status_main(void) {
     oled_write_ln("", false);
     oled_write_ln("", false);
 
-    render_corne_logo();
-
-    oled_write_ln("", false);
-    oled_write_ln("", false);
-    oled_write_ln("", false);
-
-    render_qmk_logo();
-
-    oled_write_ln("", false);
-    oled_write_ln("", false);
-    oled_write_ln("", false);
-
-    render_prompt();
-}
-
-void render_status_secondary(void) {
-    oled_write_ln("", false);
-    oled_write_ln("", false);
-
     render_kb_split();
 
     oled_write_ln("", false);
@@ -188,7 +210,32 @@ void render_status_secondary(void) {
     render_mod_status();
 };
 
+void render_status_secondary(void) {
+    render_sun_logo();
+
+    oled_write_ln("", false);
+    oled_write_ln("", false);
+
+    render_qmk_logo();
+
+    oled_write_ln("", false);
+    oled_write_ln("", false);
+
+    render_prompt();
+    oled_write_ln("", false);
+    render_wpm();
+    oled_write_ln("", false);
+}
+
 void oled_task_user(void) {
+    if (get_current_wpm() == 0) {
+        oled_clear();
+        oled_off();
+        return;
+    } else {
+        oled_on();
+    }
+
     if (is_keyboard_master()) {
         render_status_main();
     } else {

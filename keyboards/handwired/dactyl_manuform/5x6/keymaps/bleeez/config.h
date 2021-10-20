@@ -4,3 +4,6 @@
 #define SOFT_SERIAL_PIN D2
 
 #define OLED_FONT_H "keyboards/handwired/dactyl_manuform/5x6/keymaps/bleeez/glcdfont.c"
+
+#define SPLIT_LAYER_STATE_ENABLE
+#define SPLIT_WPM_ENABLE

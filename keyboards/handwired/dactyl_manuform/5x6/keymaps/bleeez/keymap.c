@@ -11,8 +11,15 @@ enum layers {
 
 enum custom_keycodes { QWERTZ = SAFE_RANGE, LOWER, RAISE, OS_CHANGE, ADJUST };
 
+#define LOW_SPC LT(_QWERTZ, KC_SPC)
+#define RAI_ESC LT(_RAISE, KC_ESC)
+#define LOW_BSPC LT(_QWERTZ, KC_BSPC)
+#define RAI_BSPC LT(_RAISE, KC_BSPC)
 #define RAI_ENT LT(_RAISE, KC_ENT)
 #define ADJUST MO(_ADJUST)
+#define CTL_TAB CTL_T(KC_TAB)
+#define CTL_DEL CTL_T(KC_DEL)
+#define GUI_ESC GUI_T(KC_ESC)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTZ] = LAYOUT_5x6(
@@ -21,17 +28,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC , KC_A  , KC_S  , KC_D  , KC_F  , KC_G  ,                         KC_H  , KC_J  , KC_K  , KC_L  ,KC_SCLN,KC_QUOT,
         KC_LSFT, KC_Z  , KC_X  , KC_C  , KC_V  , KC_B  ,                         KC_N  , KC_M  ,KC_COMM,KC_DOT ,KC_SLSH,KC_RSFT,
                         KC_LGUI,KC_LALT,                                                        KC_RGUI,_______,
-                                         LOWER , KC_SPC,                         KC_BSPC,RAI_ENT,
-                                        KC_LCTL, KC_DEL,                         KC_ENT, ADJUST ,
-                                        KC_HOME,KC_CALC,/*CALC=RPI-KVM-Switch*/  OS_CHANGE, KC_END
+                                        RAI_ENT,LOW_SPC,                         LOW_SPC, RAI_BSPC,
+                                        CTL_TAB,GUI_ESC,                         ADJUST, CTL_DEL ,
+                                        KC_LALT,KC_CALC,/*CALC=RPI-KVM-Switch*/  OS_CHANGE, ADJUST
     ),
 
     /*
     [_LOWER] = LAYOUT_5x6(
           KC_F12 , KC_F1 , KC_F2 , KC_F3 , KC_F4 , KC_F5 ,                        KC_F6  , KC_F7 , KC_F8 , KC_F9 ,KC_F10 ,KC_F11 ,
-          _______,   <   ,   [   ,   {   ,   (   ,_______,                        _______,   )   ,   }   ,   ]   ,   >   ,_______,
-          _______,   ~   ,   '   ,   "   ,   =   ,_______,                        KC_LEFT,KC_DOWN, KC_UP ,KC_RGHT,_______,_______,
-          _______,   |   ,   \   ,   /   ,   #   ,_______,                        _______,_______,_______,_______,   +   ,_______,
+             µ   ,   '   ,   #   ,   {   ,   (   ,   $   ,                           &   ,   )   ,   }   ,   °   ,   ?   ,´(dead),
+             @   ,   "   ,   !   ,   ?   ,   =   ,   /   ,                        KC_LEFT,KC_DOWN, KC_UP ,KC_RGHT,   *   , PRINT ,
+             €   ,   %   ,   \   ,   [   ,   <   ,^dead) ,                           |   ,   >   ,   ]   ,   ~   ,   +   ,^dead),
                           _______,_______,                                                        _______,_______,
                                           _______,_______,                        _______,_______,
                                           _______,_______,                        _______,_______,
@@ -39,9 +46,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [_LOWER] = LAYOUT_5x6(
           KC_F12 , KC_F1 , KC_F2 , KC_F3 , KC_F4 , KC_F5 ,                        KC_F6  , KC_F7 , KC_F8 , KC_F9 ,KC_F10 ,KC_F11 ,
-          _______,DE_LABK,DE_LBRC,DE_LCBR,DE_LPRN,_______,                        _______,KC_RCBR,DE_RBRC,DE_RABK,_______,
-          _______,DE_TILD,DE_QUOT,DE_DQUO,DE_EQL ,_______,                        KC_LEFT,KC_DOWN, KC_UP ,KC_RGHT,_______,_______,
-          _______,DE_PIPE,DE_BSLS,DE_SLSH,DE_HASH,_______,                        _______,_______,_______,_______,DE_PLUS,_______,
+          DE_MICR,DE_QUOT,DE_HASH,DE_LCBR,DE_LPRN,DE_DLR ,                        DE_AMPR,DE_LPRN ,KC_RCBR, DE_DEG,DE_QUES,DE_ACUT,
+           DE_AT ,DE_DQUO,DE_EXLM,DE_QUES,DE_EQL ,DE_SLSH,                        KC_LEFT,KC_DOWN, KC_UP ,KC_RGHT,DE_ASTR,KC_PSCR,
+          DE_EURO,DE_PERC,DE_BSLS,DE_LBRC,DE_LABK,DE_CIRC,                        DE_PIPE,DE_RABK,DE_RBRC,DE_TILD,DE_PLUS,DE_CIRC,
                           _______,_______,                                                        _______,_______,
                                           _______,_______,                        _______,_______,
                                           _______,_______,                        _______,_______,
@@ -51,9 +58,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //MAC
     [_LOWER_MAC] = LAYOUT_5x6(
           KC_F12 , KC_F1 , KC_F2 , KC_F3 , KC_F4 , KC_F5 ,                        KC_F6  , KC_F7 , KC_F8 , KC_F9 ,KC_F10 ,KC_F11 ,
-          _______, KC_GRV,A(KC_5),A(KC_8),S(KC_8),_______,                        _______,S(KC_9),A(KC_9),A(KC_6),S(KC_GRV),_______,
-          _______,A(KC_N),S(KC_NUHS),S(KC_2),S(KC_0),_______,                     KC_LEFT,KC_DOWN, KC_UP ,KC_RGHT,_______,_______,
-          _______,A(KC_7),S(A(KC_7)),S(KC_7),KC_NUHS,_______,                     _______,_______,_______,_______,KC_RBRC,_______,
+          A(KC_M),S(KC_NUHS),KC_NUHS,A(KC_8),S(KC_8),S(KC_4),                     S(KC_6),S(KC_9),A(KC_9),S(KC_GRV),S(KC_MINS),KC_EQL,
+          A(KC_L),S(KC_2),S(KC_1),S(KC_MINS),S(KC_0),S(KC_7),                     KC_LEFT,KC_DOWN, KC_UP ,KC_RGHT,S(KC_RBRC),KC_PSCR,
+          A(KC_E),S(KC_5),S(A(KC_7)),A(KC_5),KC_NUBS,KC_GRV,                      A(KC_7),S(KC_NUBS),A(KC_6),A(KC_N),KC_RBRC,KC_GRV,
                           _______,_______,                                                        _______,_______,
                                           _______,_______,                        _______,_______,
                                           _______,_______,                        _______,_______,
@@ -63,9 +70,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //Windows
     [_LOWER_WIN] = LAYOUT_5x6(
           KC_F12 , KC_F1 , KC_F2 , KC_F3 , KC_F4 , KC_F5 ,                        KC_F6  , KC_F7 , KC_F8 , KC_F9 ,KC_F10 ,KC_F11 ,
-          _______,KC_NUBS,ALGR(KC_8),ALGR(KC_7),S(KC_8),_______,                  _______,S(KC_9),ALGR(KC_0),ALGR(KC_9),S(KC_NUBS),_______,
-          _______,ALGR(KC_RBRC),S(KC_NUHS),S(KC_2),S(KC_0),_______,               KC_LEFT,KC_DOWN, KC_UP ,KC_RGHT,_______,_______,
-          _______,ALGR(KC_NUBS),ALGR(KC_MINS),S(KC_7),KC_NUHS,_______,            _______,_______,_______,_______,KC_RBRC,_______,
+          ALGR(KC_M),S(KC_NUHS),KC_NUHS,ALGR(KC_7),S(KC_8),S(KC_4),               S(KC_6),S(KC_9),ALGR(KC_0),S(KC_GRV),S(KC_MINS),KC_EQL,
+          ALGR(KC_Q),S(KC_2),S(KC_1),S(KC_MINS),S(KC_0),S(KC_7),                  KC_LEFT,KC_DOWN, KC_UP ,KC_RGHT,S(KC_RBRC),KC_PSCR,
+      ALGR(KC_E),S(KC_5),ALGR(KC_MINS),ALGR(KC_8),KC_NUBS,KC_GRV,                 ALGR(KC_NUBS),S(KC_NUBS),ALGR(KC_9),ALGR(KC_RBRC),KC_RBRC,KC_GRV,
                           _______,_______,                                                        _______,_______,
                                           _______,_______,                        _______,_______,
                                           _______,_______,                        _______,_______,
@@ -73,23 +80,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
     [_RAISE] = LAYOUT_5x6(
-        KC_TILD,KC_EXLM, KC_AT ,KC_HASH,KC_DLR ,KC_PERC,                        KC_CIRC,KC_AMPR,KC_ASTR,KC_LPRN,KC_RPRN,KC_DEL,
-        _______,_______,_______,_______,_______,KC_LBRC,                        KC_RBRC, KC_P7 , KC_P8 , KC_P9 ,_______,KC_PLUS,
-        _______,KC_HOME,KC_PGUP,KC_PGDN,KC_END ,KC_LPRN,                        KC_RPRN, KC_P4 , KC_P5 , KC_P6 ,KC_MINS,KC_PIPE,
-        _______,_______,_______,_______,_______,_______,                        _______, KC_P1 , KC_P2 , KC_P3 ,KC_EQL ,KC_UNDS,
-                        _______,KC_PSCR,                                                        _______, KC_P0,
-                                        _______,_______,                        _______,_______,
-                                        _______,_______,                        _______,_______,
-                                        _______,_______,                        _______,_______
-
+        KC_TILD,KC_EXLM, KC_AT ,KC_HASH,KC_DLR ,KC_PERC,                          KC_CIRC,KC_AMPR,KC_ASTR,KC_LPRN,KC_RPRN,KC_DEL,
+        KC_GRV , KC_1  , KC_2  , KC_3  , KC_4  , KC_5  ,                           KC_6  , KC_7  , KC_8  , KC_9  , KC_0  ,KC_MINS,
+        _______,_______,_______,_______,_______,_______,                           KC_0  , KC_4  , KC_5  , KC_6  ,_______,_______,
+        _______,_______,_______,_______,_______,_______,                          _______, KC_1  , KC_2  , KC_3  ,_______,_______,
+                        _______,_______,                                                           KC_0  , KC_0  ,
+                                        _______,_______,                          _______,_______,
+                                        _______,_______,                          _______,_______,
+                                        _______,_______,                          _______,_______
     ),
 
     [_ADJUST] = LAYOUT_5x6(
-          KC_F12 , KC_F1 , KC_F2 , KC_F3 , KC_F4 , KC_F5 ,                        KC_F6  , KC_F7 , KC_F8 , KC_F9 ,KC_F10 ,KC_F11 ,
-          _______,_______,_______,_______,_______,KC_LBRC,                        _______,KC_MUTE,KC_NLCK,KC_INS ,KC_SLCK,_______,
-          _______,KC_LEFT,KC_UP  ,KC_DOWN,KC_RGHT,KC_LPRN,                        _______,KC_VOLU,KC_MPLY,KC_MNXT,_______,_______,
-          _______,_______,_______,_______,_______,_______,                        _______,KC_VOLD,_______,_______,_______,_______,
-                          _______,_______,                                                        KC_EQL ,_______,
+          KC_F12 , KC_F1 , KC_F2 , KC_F3 , KC_F4 , KC_F5 ,                         KC_F6 , KC_F7 , KC_F8 , KC_F9 ,KC_F10 ,KC_F11 ,
+          KC_F12 , KC_F1 , KC_F2 , KC_F3 , KC_F4 , KC_F5 ,                         KC_F6 , KC_F7 , KC_F8 , KC_F9 ,KC_F10 ,KC_F11 ,
+          _______,_______,_______,_______,_______,_______,                        KC_MUTE,KC_VOLU,KC_BRIU,_______,_______,_______,
+          _______,_______,_______,_______,_______,_______,                        _______,KC_VOLD,KC_BRID,_______,_______,_______,
+                          _______,_______,                                                        _______,_______,
                                           _______,_______,                        _______,_______,
                                           _______,_______,                        _______,_______,
                                           _______,_______,                        _______,_______
@@ -114,8 +120,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
-        case LOWER:
-            if (record->event.pressed) {
+        case LOW_SPC:
+        case LOW_BSPC:
+            if (record->tap.count) {
+                return true;
+            } else if (record->event.pressed) {
                 if (os_active == _MAC) {
                     layer_on(_LOWER_MAC);
                 } else {

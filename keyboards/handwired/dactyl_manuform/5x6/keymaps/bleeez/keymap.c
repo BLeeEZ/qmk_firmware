@@ -14,6 +14,9 @@ enum custom_keycodes { QWERTZ = SAFE_RANGE, LOWER, RAISE, OS_CHANGE, ADJUST };
 
 #define LOW_SPC LT(_QWERTZ, KC_SPC)
 #define RAI_BSPC LT(_QWERTZ, KC_BSPC)
+#define RAI_ENT LT(_QWERTZ, KC_ENT)
+#define RAI_ESC LT(_QWERTZ, KC_ESC)
+#define ADJ_DEL LT(_ADJUST, KC_DEL)
 #define ADJUST MO(_ADJUST)
 #define CTL_TAB CTL_T(KC_TAB)
 #define CTL_DEL CTL_T(KC_DEL)
@@ -23,10 +26,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTZ] = LAYOUT_5x6(
         KC_ESC , KC_1  , KC_2  , KC_3  , KC_4  , KC_5  ,                         KC_6  , KC_7  , KC_8  , KC_9  , KC_0  ,KC_MINS,
         KC_TAB , KC_Q  , KC_W  , KC_E  , KC_R  , KC_T  ,                         KC_Y  , KC_U  , KC_I  , KC_O  , KC_P  ,KC_LBRC,
-        KC_ESC ,LSFT_T(KC_A), KC_S  , KC_D  , KC_F  , KC_G  ,                    KC_H  , KC_J  , KC_K  , KC_L  ,RSFT_T(KC_SCLN),KC_QUOT,
+        KC_ESC ,LSFT_T(KC_A), KC_S  ,LALT_T(KC_D),LGUI_T(KC_F),KC_G,             KC_H  ,RGUI_T(KC_J),RALT_T(KC_K), KC_L  ,RSFT_T(KC_SCLN),KC_QUOT,
         KC_LSFT, KC_Z  , KC_X  , KC_C  , KC_V  , KC_B  ,                         KC_N  , KC_M  ,KC_COMM,KC_DOT ,KC_SLSH,KC_RSFT,
                         KC_LGUI,KC_LALT,                                                        KC_RGUI,_______,
-                                        RAI_ENT,LOW_SPC,                         KC_ESC, RAI_BSPC,
+                                        RAI_ENT,LOW_SPC,                         RAI_ESC, RAI_BSPC,
                                         CTL_TAB,GUI_ESC,                         ADJUST, ADJ_DEL ,
                                         KC_LALT,KC_CALC,/*CALC=RPI-KVM-Switch*/  OS_CHANGE, ADJUST
     ),
@@ -80,9 +83,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     /*
     [_RAISE] = LAYOUT_5x6(
                ,       ,       ,       ,       ,       ,                               ,       ,       ,       ,       ,       ,
-               ,       ,   µ   ,   €   ,   @   ,       ,                               ,   7   ,   8   ,   9   ,       ,       ,
+               ,       ,       ,       ,       ,       ,                               ,   7   ,   8   ,   9   ,       ,       ,
                , LSFT  ,   ä   ,   ö   ,   ü   ,   ß   ,                           0   ,   4   ,   5   ,   6   , RSFT  ,       ,
-               ,       ,       ,       ,       ,       ,                               ,   1   ,   2   ,   3   ,       ,       ,
+               ,       ,   µ   ,   €   ,   @   ,       ,                               ,   1   ,   2   ,   3   ,       ,       ,
                         _______,_______,                                                        _______,_______,
                                         _______,_______,                        _______,_______,
                                         _______,_______,                        _______,_______,
@@ -92,9 +95,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //MAC
     [_RAISE_MAC] = LAYOUT_5x6(
         _______,_______,_______,_______,_______,_______,                          _______,_______,_______,_______,_______,_______,
-        _______,_______,A(KC_M),A(KC_E),A(KC_L),_______,                          _______, KC_7  , KC_8  , KC_9  ,_______,_______,
+        _______,_______,_______,_______,_______,_______,                          _______, KC_7  , KC_8  , KC_9  ,_______,_______,
         _______,KC_LSFT,KC_QUOT,KC_SCLN,KC_LBRC,KC_MINS,                           KC_0  , KC_4  , KC_5  , KC_6  ,KC_RSFT,_______,
-        _______,_______,_______,_______,_______,_______,                          _______, KC_1  , KC_2  , KC_3  ,_______,_______,
+        _______,_______,A(KC_M),A(KC_E),A(KC_L),_______,                          _______, KC_1  , KC_2  , KC_3  ,_______,_______,
                         _______,_______,                                                          _______,_______,
                                         _______,_______,                          _______,_______,
                                         _______,_______,                          _______,_______,
@@ -104,9 +107,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //Windows
     [_RAISE_WIN] = LAYOUT_5x6(
         _______,_______,_______,_______,_______,_______,                          _______,_______,_______,_______,_______,_______,
-     _______,_______,ALGR(KC_M),ALGR(KC_E),ALGR(KC_Q),_______,                    _______, KC_7  , KC_8  , KC_9  ,_______,_______,
+        _______,_______,_______,_______,_______,_______,                          _______, KC_7  , KC_8  , KC_9  ,_______,_______,
         _______,KC_LSFT,KC_QUOT,KC_SCLN,KC_LBRC,KC_MINS,                           KC_0  , KC_4  , KC_5  , KC_6  ,KC_RSFT,_______,
-        _______,_______,_______,_______,_______,_______,                          _______, KC_1  , KC_2  , KC_3  ,_______,_______,
+        _______,_______,ALGR(KC_M),ALGR(KC_E),ALGR(KC_Q),_______,                          _______, KC_1  , KC_2  , KC_3  ,_______,_______,
                         _______,_______,                                                          _______,_______,
                                         _______,_______,                          _______,_______,
                                         _______,_______,                          _______,_______,
@@ -144,7 +147,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
         case LOW_SPC:
-        case LOW_BSPC:
             if (record->tap.count) {
                 return true;
             } else if (record->event.pressed) {
@@ -162,6 +164,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
             return false;
         case RAI_BSPC:
+        case RAI_ESC:
             if (record->tap.count) {
                 return true;
             } else if (record->event.pressed) {
@@ -284,7 +287,7 @@ void render_layer(void) {
     uint8_t layer = 0;
     if (layer_state_is(_LOWER_MAC) || layer_state_is(_LOWER_WIN)) {
         layer = 1;
-    } else if (layer_state_is(_RAISE_MAC)) || layer_state_is(_RAISE_WIN)) {
+    } else if (layer_state_is(_RAISE_MAC) || layer_state_is(_RAISE_WIN)) {
         layer = 2;
     } else if (layer_state_is(_ADJUST)) {
         layer = 3;

@@ -12,25 +12,25 @@ enum layers {
 
 enum custom_keycodes { QWERTZ = SAFE_RANGE, LOWER, RAISE, OS_CHANGE, ADJUST };
 
-#define LOW_SPC LT(_QWERTZ, KC_SPC)
-#define RAI_BSPC LT(_QWERTZ, KC_BSPC)
-#define RAI_ENT LT(_QWERTZ, KC_ENT)
-#define RAI_ESC LT(_QWERTZ, KC_ESC)
+#define LOW_SPC LT(_LOWER_MAC, KC_SPC)
+#define RAI_SPC LT(_RAISE_MAC, KC_SPC)
 #define ADJ_DEL LT(_ADJUST, KC_DEL)
+#define RAI_DEL LT(_QWERTZ, KC_DEL)
 #define ADJUST MO(_ADJUST)
 #define CTL_TAB CTL_T(KC_TAB)
-#define CTL_DEL CTL_T(KC_DEL)
+#define CTL_ENT CTL_T(KC_ENT)
+#define CTL_ESC CTL_T(KC_ESC)
 #define GUI_ESC GUI_T(KC_ESC)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_QWERTZ] = LAYOUT_5x6(
         KC_ESC , KC_1  , KC_2  , KC_3  , KC_4  , KC_5  ,                         KC_6  , KC_7  , KC_8  , KC_9  , KC_0  ,KC_MINS,
-        KC_TAB , KC_Q  , KC_W  , KC_E  , KC_R  , KC_T  ,                         KC_Y  , KC_U  , KC_I  , KC_O  , KC_P  ,KC_LBRC,
-        KC_ESC ,LSFT_T(KC_A), KC_S  ,LALT_T(KC_D),LGUI_T(KC_F),KC_G,             KC_H  ,RGUI_T(KC_J),RALT_T(KC_K), KC_L  ,RSFT_T(KC_SCLN),KC_QUOT,
-        KC_LSFT, KC_Z  , KC_X  , KC_C  , KC_V  , KC_B  ,                         KC_N  , KC_M  ,KC_COMM,KC_DOT ,KC_SLSH,KC_RSFT,
+        KC_TAB , KC_Q  , KC_W  , KC_F  , KC_P  , KC_B  ,                         KC_J  , KC_L  , KC_U  , KC_Z  , S(KC_COMM)  ,KC_LBRC,
+        KC_ESC , KC_A , KC_R  ,LALT_T(KC_S),LGUI_T(KC_T),KC_G,                   KC_M  ,RGUI_T(KC_N),RALT_T(KC_E), KC_I  , KC_O  ,KC_QUOT,
+        KC_LSFT, KC_Y  , KC_X  , KC_C  , KC_D  , KC_V  ,                         KC_K  , KC_H  ,KC_COMM,KC_DOT ,KC_SLSH,KC_RSFT,
                         KC_LGUI,KC_LALT,                                                        KC_RGUI,_______,
-                                        RAI_ENT,LOW_SPC,                         RAI_ESC, RAI_BSPC,
-                                        CTL_TAB,GUI_ESC,                         ADJUST, ADJ_DEL ,
+                                        SFT_T(KC_ENT),LOW_SPC,                   RAI_SPC, SFT_T(KC_BSPC),
+                                        CTL_ESC,KC_TAB,                          ADJUST, ADJ_DEL ,
                                         KC_LALT,KC_CALC,/*CALC=RPI-KVM-Switch*/  OS_CHANGE, ADJUST
     ),
 
@@ -48,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_LOWER] = LAYOUT_5x6(
         KC_F12 , KC_F1 , KC_F2 , KC_F3 , KC_F4 , KC_F5 ,                        KC_F6  , KC_F7 , KC_F8 , KC_F9 ,KC_F10 ,KC_F11 ,
         DE_MICR,DE_QUOT,DE_HASH,DE_LCBR,DE_LPRN,DE_DLR ,                        DE_AMPR,DE_LPRN ,KC_RCBR, DE_DEG,DE_QUES,DE_ACUT,
-        DE_AT ,DE_DQUO,DE_EXLM,DE_QUES,DE_EQL ,DE_SLSH,                        KC_LEFT,KC_DOWN, KC_UP ,KC_RGHT,DE_ASTR,KC_PSCR,
+        DE_AT ,DE_DQUO,DE_EXLM,DE_QUES,DE_EQL ,DE_SLSH,                         KC_LEFT,KC_DOWN, KC_UP ,KC_RGHT,DE_ASTR,KC_PSCR,
         DE_EURO,DE_PERC,DE_BSLS,DE_LBRC,DE_LABK,DE_CIRC,                        DE_PIPE,DE_RABK,DE_RBRC,DE_TILD,DE_PLUS,DE_CIRC,
                         _______,_______,                                                        _______,_______,
                                         _______,_______,                        _______,_______,
@@ -73,7 +73,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_F12 , KC_F1 , KC_F2 , KC_F3 , KC_F4 , KC_F5 ,                        KC_F6  , KC_F7 , KC_F8 , KC_F9 ,KC_F10 ,KC_F11 ,
         ALGR(KC_M),S(KC_NUHS),KC_NUHS,ALGR(KC_7),S(KC_8),S(KC_4),               S(KC_6),S(KC_9),ALGR(KC_0),S(KC_GRV),S(KC_MINS),KC_EQL,
         ALGR(KC_Q),S(KC_2),S(KC_1),S(KC_MINS),S(KC_0),S(KC_7),                  KC_LEFT,KC_DOWN, KC_UP ,KC_RGHT,S(KC_RBRC),KC_PSCR,
-      ALGR(KC_E),S(KC_5),ALGR(KC_MINS),ALGR(KC_8),KC_NUBS,KC_GRV,                 ALGR(KC_NUBS),S(KC_NUBS),ALGR(KC_9),ALGR(KC_RBRC),KC_RBRC,KC_GRV,
+      ALGR(KC_E),S(KC_5),ALGR(KC_MINS),ALGR(KC_8),KC_NUBS,KC_GRV,               ALGR(KC_NUBS),S(KC_NUBS),ALGR(KC_9),ALGR(KC_RBRC),KC_RBRC,KC_GRV,
                         _______,_______,                                                        _______,_______,
                                         _______,_______,                        _______,_______,
                                         _______,_______,                        _______,_______,
@@ -84,7 +84,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_RAISE] = LAYOUT_5x6(
                ,       ,       ,       ,       ,       ,                               ,       ,       ,       ,       ,       ,
                ,       ,       ,       ,       ,       ,                               ,   7   ,   8   ,   9   ,       ,       ,
-               , LSFT  ,   ä   ,   ö   ,   ü   ,   ß   ,                           0   ,   4   ,   5   ,   6   , RSFT  ,       ,
+               ,       ,   ä   ,   ö   ,   ü   ,   ß   ,                           0   ,   4   ,   5   ,   6   ,   0   ,       ,
                ,       ,   µ   ,   €   ,   @   ,       ,                               ,   1   ,   2   ,   3   ,       ,       ,
                         _______,_______,                                                        _______,_______,
                                         _______,_______,                        _______,_______,
@@ -96,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_RAISE_MAC] = LAYOUT_5x6(
         _______,_______,_______,_______,_______,_______,                          _______,_______,_______,_______,_______,_______,
         _______,_______,_______,_______,_______,_______,                          _______, KC_7  , KC_8  , KC_9  ,_______,_______,
-        _______,KC_LSFT,KC_QUOT,KC_SCLN,KC_LBRC,KC_MINS,                           KC_0  , KC_4  , KC_5  , KC_6  ,KC_RSFT,_______,
+        _______,_______,KC_QUOT,KC_SCLN,KC_LBRC,KC_MINS,                           KC_0  , KC_4  , KC_5  , KC_6  , KC_0  ,_______,
         _______,_______,A(KC_M),A(KC_E),A(KC_L),_______,                          _______, KC_1  , KC_2  , KC_3  ,_______,_______,
                         _______,_______,                                                          _______,_______,
                                         _______,_______,                          _______,_______,
@@ -108,8 +108,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [_RAISE_WIN] = LAYOUT_5x6(
         _______,_______,_______,_______,_______,_______,                          _______,_______,_______,_______,_______,_______,
         _______,_______,_______,_______,_______,_______,                          _______, KC_7  , KC_8  , KC_9  ,_______,_______,
-        _______,KC_LSFT,KC_QUOT,KC_SCLN,KC_LBRC,KC_MINS,                           KC_0  , KC_4  , KC_5  , KC_6  ,KC_RSFT,_______,
-        _______,_______,ALGR(KC_M),ALGR(KC_E),ALGR(KC_Q),_______,                          _______, KC_1  , KC_2  , KC_3  ,_______,_______,
+        _______,_______,KC_QUOT,KC_SCLN,KC_LBRC,KC_MINS,                           KC_0  , KC_4  , KC_5  , KC_6  , KC_0  ,_______,
+        _______,_______,ALGR(KC_M),ALGR(KC_E),ALGR(KC_Q),_______,                 _______, KC_1  , KC_2  , KC_3  ,_______,_______,
                         _______,_______,                                                          _______,_______,
                                         _______,_______,                          _______,_______,
                                         _______,_______,                          _______,_______,
@@ -163,8 +163,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
-        case RAI_BSPC:
-        case RAI_ESC:
+        case RAI_SPC:
             if (record->tap.count) {
                 return true;
             } else if (record->event.pressed) {
@@ -184,6 +183,22 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         default:
             return true;
     };
+}
+
+bool get_ignore_mod_tap_interrupt(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case LALT_T(KC_S):
+        case LGUI_T(KC_T):
+        case RGUI_T(KC_N):
+        case RALT_T(KC_E):
+            // Do not force the mod-tap key press to be handled as a modifier
+            // if any other key was pressed while the mod-tap key is held down.
+            return true;
+        default:
+            // Force the mod-tap key press to be handled as a modifier if any
+            // other key was pressed while the mod-tap key is held down.
+            return false;
+    }
 }
 
 #ifdef OLED_ENABLE

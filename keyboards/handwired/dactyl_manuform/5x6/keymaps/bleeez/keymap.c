@@ -59,7 +59,7 @@
 // \ Backslash
 #define DM_BSLS S(A(KC_7))
 #define DW_BSLS ALGR(KC_MINS)
-// { 
+// {
 #define DM_LCBR A(KC_8)
 #define DW_LCBR ALGR(KC_7)
 // ?
@@ -126,7 +126,7 @@
 #define DM_EURO A(KC_E)
 #define DW_EURO ALGR(KC_E)
 // @
-#define DM_AT A(KC_L) 
+#define DM_AT A(KC_L)
 #define DW_AT ALGR(KC_Q)
 // ß
 #define DM_SS KC_MINS
@@ -184,10 +184,10 @@ enum layers {
 enum custom_keycodes { QWERTZ = SAFE_RANGE, LOWER, RAISE, OS_CHANGE, ADJUST };
 
 #define NAV_SPC LT(_NAV_MAC, KC_SPC)
-#define NUM_ESC LT(_NUMBER_MAC, KC_ESC)
+#define NUM_TAB LT(_NUMBER_MAC, KC_TAB)
 
 #define RAI_SPC LT(_RAISE_MAC, KC_SPC)
-#define RAI_TAB LT(_RAISE_MAC, KC_TAB)
+#define RAI_ESC LT(_RAISE_MAC, KC_ESC)
 #define LOW_DEL LT(_LOWER_MAC, KC_DEL)
 
 #define ADJ_DEL LT(_ADJUST, KC_DEL)
@@ -205,8 +205,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, KC_A ,LALT_T(KC_R),LGUI_T(KC_S),LCTL_T(KC_T),KC_G,              KC_M  ,RCTL_T(KC_N),RGUI_T(KC_E),RALT_T(KC_I), KC_O  ,_______,
         _______, KC_Y  , KC_X  , KC_C  , KC_D  , KC_V  ,                         KC_K  , KC_H  ,KC_COMM,KC_DOT ,KC_SLSH,_______,
                         _______,_______,                                                        _______,_______,
-                                        SFT_T(KC_ENT),NAV_SPC,                   RAI_TAB, SFT_T(KC_BSPC),
-                                        NUM_ESC,KC_TAB,                          ADJUST,LOW_DEL,
+                                        SFT_T(KC_ENT),NAV_SPC,                   RAI_ESC, SFT_T(KC_BSPC),
+                                        NUM_TAB,KC_TAB,                          ADJUST,LOW_DEL,
                                         KC_LALT,KC_CALC,/*CALC=RPI-KVM-Switch*/  OS_CHANGE, ADJUST
     ),
 /*
@@ -291,9 +291,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                         _______,_______,                          _______,_______
     ),
 /*
-               ,   °   ,   µ   ,   €   ,   @   ,   ß   ,                                ,  F7   ,  F8   ,  F9   ,  F12  ,       ,                     
-               ,   |   ,   &   ,   !   ,   ?   , PRINT ,                                ,  F4   ,  F5   ,  F6   ,  F11  ,       ,                    
-               ,   %   ,   ü   ,   ö   ,   ä   ,       ,                                ,  F1   ,  F2   ,  F3   ,  F10  ,       ,                    
+               ,   °   ,   µ   ,   €   ,   @   ,   ß   ,                                ,  F7   ,  F8   ,  F9   ,  F12  ,       ,
+               ,   |   ,   &   ,   !   ,   ?   , PRINT ,                                ,  F4   ,  F5   ,  F6   ,  F11  ,       ,
+               ,   %   ,   ü   ,   ö   ,   ä   ,       ,                                ,  F1   ,  F2   ,  F3   ,  F10  ,       ,
 */
     //MAC
     [_LOWER_MAC] = LAYOUT_5x6(
@@ -365,7 +365,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
-        case NUM_ESC:
+        case NUM_TAB:
             if (record->tap.count) {
                 return true;
             } else if (record->event.pressed) {
@@ -399,7 +399,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
-        case RAI_TAB:
+        case RAI_ESC:
         case RAI_SPC:
             if (record->tap.count) {
                 return true;
@@ -536,7 +536,7 @@ void render_wpm(void) {
 // 5x1 Layer indicator
 
 void render_layer(void) {
-    static const char PROGMEM font_layer[4][6] = {
+    static const char PROGMEM font_layer[6][6] = {
         {0x85, 0x86, 0x87, 0x88, 0x89, 0}, // qwertz
         {0xba, 0xbb, 0xbc, 0xbd, 0xbe, 0}, // nav
         {0xda, 0xdb, 0xdc, 0xdd, 0xde, 0}, // number

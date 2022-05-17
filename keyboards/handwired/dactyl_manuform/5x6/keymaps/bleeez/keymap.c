@@ -538,6 +538,8 @@ void render_wpm(void) {
 void render_layer(void) {
     static const char PROGMEM font_layer[4][6] = {
         {0x85, 0x86, 0x87, 0x88, 0x89, 0}, // qwertz
+        {0xba, 0xbb, 0xbc, 0xbd, 0xbe, 0}, // nav
+        {0xda, 0xdb, 0xdc, 0xdd, 0xde, 0}, // number
         {0xc5, 0xc6, 0xc7, 0xc8, 0xc9, 0}, // lower
         {0xa5, 0xa6, 0xa7, 0xa8, 0xa9, 0}, // raise
         {0x9a, 0x9b, 0x9c, 0x9d, 0x9e, 0}, // adjust
@@ -546,13 +548,13 @@ void render_layer(void) {
     if (layer_state_is(_NAV_MAC) || layer_state_is(_NAV_WIN)) {
         layer = 1;
     } else if (layer_state_is(_NUMBER_MAC) || layer_state_is(_NUMBER_WIN)) {
-        layer = 1;
+        layer = 2;
     } else if (layer_state_is(_LOWER_MAC) || layer_state_is(_LOWER_WIN)) {
-        layer = 2;
-    } else if (layer_state_is(_RAISE_MAC) || layer_state_is(_RAISE_WIN)) {
-        layer = 2;
-    } else if (layer_state_is(_ADJUST)) {
         layer = 3;
+    } else if (layer_state_is(_RAISE_MAC) || layer_state_is(_RAISE_WIN)) {
+        layer = 4;
+    } else if (layer_state_is(_ADJUST)) {
+        layer = 5;
     }
     oled_write_P(font_layer[layer], false);
 };

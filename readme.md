@@ -16,6 +16,25 @@ The docs are powered by [Docsify](https://docsify.js.org/) and hosted on [GitHub
 
 You can request changes by making a fork and opening a [pull request](https://github.com/qmk/qmk_firmware/pulls), or by clicking the "Edit this page" link at the bottom of any page.
 
+## BLeeEZ Keyboards
+
+* [Dactyl Manuform 5x6](/keyboards/handwired/dactyl_manuform/5x6/keymaps/bleeez)
+* [Skeletyl](/keyboards/bastardkb/skeletyl/keymaps/bleeez)
+
+### Configure Your Build Environment
+
+```
+qmk config user.keyboard=<keyboard>
+qmk config user.keyboard=handwired/dactyl_manuform/5x6
+qmk config user.keyboard=bastardkb/skeletyl
+qmk config user.keymap=<github_username>
+qmk config user.keymap=bleeez
+qmk compile
+qmk compile -kb <keyboard> -km <keymap>
+qmk compile -kb handwired/dactyl_manuform/5x6 -km bleeez
+qmk compile -kb bastardkb/skeletyl -km bleeez
+```
+
 ## Supported Keyboards
 
 * [Planck](/keyboards/planck/)

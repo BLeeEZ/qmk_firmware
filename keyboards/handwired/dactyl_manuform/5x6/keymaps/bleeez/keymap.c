@@ -24,6 +24,7 @@
    }        KC_RCBR     A(KC_9)         ALGR(KC_0)
    °        DE_DEG      S(KC_GRV)       S(KC_GRV)
    ´(dead)  DE_ACUT     KC_EQL          KC_EQL
+   `(dead)  DE_GRV      S(KC_EQL)       S(KC_EQL)
    *        DE_ASTR     S(KC_RBRC)      S(KC_RBRC)
    |        DE_PIPE     A(KC_7)         ALGR(KC_NUBS)
    >        DE_RABK     S(KC_NUBS)      S(KC_NUBS)
@@ -101,6 +102,9 @@
 // ´(dead)
 #define DM_ACUT KC_EQL
 #define DW_ACUT KC_EQL
+// `(dead)
+#define DM_GRV S(KC_EQL)
+#define DW_GRV S(KC_EQL)
 // *
 #define DM_ASTR S(KC_RBRC)
 #define DW_ASTR S(KC_RBRC)
@@ -264,16 +268,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                         _______,_______,                        _______,_______
     ),
 /*
-               ,´(dead),   <   ,   >   ,   [   ,   #   ,                                ,   7   ,   8   ,   9   ,   *   ,       ,
-               ,   "   ,   (   ,   )   ,   =   ,   /   ,                            /   ,   4   ,   5   ,   6   ,   0   ,       ,
-               ,   '   ,   {   ,   }   ,   ]   ,   \   ,                                ,   1   ,   2   ,   3   ,   +   ,       ,
+               ,`(dead),   <   ,   >   ,   [   ,   #   ,                                ,   7   ,   8   ,   9   ,       ,       ,
+               ,   "   ,   (   ,   )   ,   =   ,   /   ,                            *   ,   4   ,   5   ,   6   ,   0   ,       ,
+               ,   '   ,   {   ,   }   ,   ]   ,   \   ,                         ´(dead),   1   ,   2   ,   3   ,   +   ,       ,
 */
     //MAC
     [_RAISE_MAC] = LAYOUT_5x6(
         _______,_______,_______,_______,_______,_______,                          _______,_______,_______,_______,_______,_______,
-        _______,DM_ACUT,DM_LABK,DM_RABK,DM_LBRC,DM_HASH,                          _______, KC_7  , KC_8  , KC_9  ,DM_ASTR,_______,
-        _______,DM_DQUO,DM_LPRN,DM_RPRN,DM_EQL ,DM_SLSH,                          DM_SLSH, KC_4  , KC_5  , KC_6  , KC_0  ,_______,
-        _______,DM_QUOT,DM_LCBR,DM_RCBR,DM_RBRC,DM_BSLS,                          _______, KC_1  , KC_2  , KC_3  ,DM_PLUS,_______,
+        _______, DM_GRV,DM_LABK,DM_RABK,DM_LBRC,DM_HASH,                          _______, KC_7  , KC_8  , KC_9  ,_______,_______,
+        _______,DM_DQUO,DM_LPRN,DM_RPRN,DM_EQL ,DM_SLSH,                          DM_ASTR, KC_4  , KC_5  , KC_6  , KC_0  ,_______,
+        _______,DM_QUOT,DM_LCBR,DM_RCBR,DM_RBRC,DM_BSLS,                          DM_ACUT, KC_1  , KC_2  , KC_3  ,DM_PLUS,_______,
                         _______,_______,                                                          _______,_______,
                                         _______,_______,                          _______,_______,
                                         _______,_______,                          _______,_______,
@@ -282,9 +286,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     //Windows
     [_RAISE_WIN] = LAYOUT_5x6(
         _______,_______,_______,_______,_______,_______,                          _______,_______,_______,_______,_______,_______,
-        _______,DW_ACUT,DW_LABK,DW_RABK,DW_LBRC,DW_HASH,                          _______, KC_7  , KC_8  , KC_9  ,DW_ASTR,_______,
-        _______,DW_DQUO,DW_LPRN,DW_RPRN,DW_EQL ,DW_SLSH,                          DW_SLSH, KC_4  , KC_5  , KC_6  , KC_0  ,_______,
-        _______,DW_QUOT,DW_LCBR,DW_RCBR,DW_RBRC,DW_BSLS,                          _______, KC_1  , KC_2  , KC_3  ,DW_PLUS,_______,
+        _______, DW_GRV,DW_LABK,DW_RABK,DW_LBRC,DW_HASH,                          _______, KC_7  , KC_8  , KC_9  ,_______,_______,
+        _______,DW_DQUO,DW_LPRN,DW_RPRN,DW_EQL ,DW_SLSH,                          DW_ASTR, KC_4  , KC_5  , KC_6  , KC_0  ,_______,
+        _______,DW_QUOT,DW_LCBR,DW_RCBR,DW_RBRC,DW_BSLS,                          DW_ACUT, KC_1  , KC_2  , KC_3  ,DW_PLUS,_______,
                         _______,_______,                                                          _______,_______,
                                         _______,_______,                          _______,_______,
                                         _______,_______,                          _______,_______,

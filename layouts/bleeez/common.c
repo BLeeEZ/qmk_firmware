@@ -185,6 +185,99 @@ enum custom_keycodes { QWERTZ = SAFE_RANGE, LOWER, RAISE, OS_CHANGE, ADJUST };
 #define GUI_ESC GUI_T(KC_ESC)
 
 
+/*
+    THUMB KEYS
+                                    Left thumb keys                Right thumb keys
+                                TMB_LA1,TMB_LP ,TMB_LA2,        TMB_RA2,TMB_RP ,TMB_RA1
+    LP:  Left Primary
+    LA1: Left Alternative 1
+    LA2: Left Alternative 2
+
+    RP:  Right Primary
+    RA1: Right Alternative 1
+    RA2: Right Alternative 2
+*/
+#define TMB_LP  NAV_SPC
+#define TMB_LA1 SFT_T(KC_ENT)
+#define TMB_LA2 NUM_TAB
+
+#define TMB_RP  RAI_ESC
+#define TMB_RA1 SFT_T(KC_BSPC)
+#define TMB_RA2 LOW_DEL
+
+/*
+    (
+                        ,       ,       ,       ,       ,                               ,       ,       ,       ,       ,
+                        ,       ,       ,       ,       ,                               ,       ,       ,       ,       ,
+                        ,       ,       ,       ,       ,                               ,       ,       ,       ,       ,
+    )
+*/
+#define ALPHA_L1  KC_Q  , KC_W  , KC_F  , KC_P  , KC_B ,                          KC_J  , KC_L  , KC_U  , KC_Z  , S(KC_COMM)  
+#define ALPHA_L2  KC_A ,LALT_T(KC_R),LGUI_T(KC_S),LCTL_T(KC_T),KC_G,              KC_M  ,RCTL_T(KC_N),RGUI_T(KC_E),RALT_T(KC_I), KC_O
+#define ALPHA_L3  KC_Y  , KC_X  , KC_C  , KC_D  , KC_V  ,                         KC_K  , KC_H  ,KC_COMM,KC_DOT ,KC_SLSH
+/*
+                          ,       , Find  , Build ,       ,                            0  ,^(dead),   '   ,`(dead),   $   ,
+                    Undo  ,  Cut  , Copy  , Paste ,       ,                        KC_LEFT,KC_DOWN, KC_UP ,KC_RGHT,       ,
+                          ,       ,       ,  All  ,       ,                               ,  HOME ,word <-,word ->,  END  ,
+*/
+#define NAV_DM_L1  _______,_______,C(KC_F),C(KC_B),_______,                         KC_0  ,DM_CIRC,DM_QUOT,DM_GRV ,DM_DLR 
+#define NAV_DM_L2  C(KC_Y),C(KC_X),C(KC_C),C(KC_V),_______,                        KC_LEFT,KC_DOWN, KC_UP ,KC_RGHT,_______
+#define NAV_DM_L3  _______,_______,_______,C(KC_A),_______,                        _______,KC_HOME,DM_WGL ,DM_WGR , KC_END
+
+#define NAV_DW_L1  _______,_______,C(KC_F),C(KC_B),_______,                         KC_0  ,DW_CIRC,DW_QUOT,DW_GRV ,DW_DLR 
+#define NAV_DW_L2  C(KC_Y),C(KC_X),C(KC_C),C(KC_V),_______,                        KC_LEFT,KC_DOWN, KC_UP ,KC_RGHT,_______
+#define NAV_DW_L3  _______,_______,_______,C(KC_A),_______,                        _______,KC_HOME,DW_WGL ,DW_WGR , KC_END
+/*
+                          ,       ,       ,       ,       ,                               ,   7   ,   8   ,   9   ,       ,
+                          ,OS_CHANGE,Bright+, VOL +, MUTE ,                           *   ,   4   ,   5   ,   6   ,   0   ,
+                          ,       ,Bright-, VOL - ,       ,                               ,   1   ,   2   ,   3   ,   +   ,
+*/
+#define NUM_DM_L1  _______,_______,_______,_______,_______,                        _______, KC_7  , KC_8  , KC_9  ,_______
+#define NUM_DM_L2  _______,OS_CHANGE,KC_BRIU,KC_VOLU,KC_MUTE,                      DM_ASTR, KC_4  , KC_5  , KC_6  , KC_0  
+#define NUM_DM_L3  _______,_______,KC_BRID,KC_VOLD,_______,                        _______, KC_1  , KC_2  , KC_3  ,DM_PLUS
+
+#define NUM_DW_L1  _______,_______,_______,_______,_______,                        _______, KC_7  , KC_8  , KC_9  ,_______
+#define NUM_DW_L2  _______,OS_CHANGE,KC_BRIU,KC_VOLU,KC_MUTE,                      DW_ASTR, KC_4  , KC_5  , KC_6  , KC_0  
+#define NUM_DW_L3  _______,_______,KC_BRID,KC_VOLD,_______,                        _______, KC_1  , KC_2  , KC_3  ,DW_PLUS
+/*
+                       [   ,   <   ,   >   ,   !   ,   #   ,                              ,   7   ,   8   ,   9   ,       ,
+                       "   ,   (   ,   )   ,   =   ,   /   ,                          *   ,   4   ,   5   ,   6   ,   0   ,
+                       ]   ,   {   ,   }   ,   ?   ,   \   ,                       ´(dead),   1   ,   2   ,   3   ,   +   ,
+*/
+#define RAISE_DM_L1 DM_LBRC,DM_LABK,DM_RABK,DM_EXLM,DM_HASH,                       _______, KC_7  , KC_8  , KC_9  ,_______
+#define RAISE_DM_L2 DM_DQUO,DM_LPRN,DM_RPRN,DM_EQL ,DM_SLSH,                       DM_ASTR, KC_4  , KC_5  , KC_6  , KC_0  
+#define RAISE_DM_L3 DM_RBRC,DM_LCBR,DM_RCBR,DM_QUES,DM_BSLS,                       DM_ACUT, KC_1  , KC_2  , KC_3  ,DM_PLUS
+
+#define RAISE_DW_L1 DW_LBRC,DW_LABK,DW_RABK,DW_EXLM,DW_HASH,                       _______, KC_7  , KC_8  , KC_9  ,_______
+#define RAISE_DW_L2 DW_DQUO,DW_LPRN,DW_RPRN,DW_EQL ,DW_SLSH,                       DW_ASTR, KC_4  , KC_5  , KC_6  , KC_0  
+#define RAISE_DW_L3 DW_RBRC,DW_LCBR,DW_RCBR,DW_QUES,DW_BSLS,                       DW_ACUT, KC_1  , KC_2  , KC_3  ,DW_PLUS
+/*
+                       °   ,   µ   ,   €   ,   @   ,   ß   ,                              ,  F7   ,  F8   ,  F9   ,  F12  ,
+                       |   ,   &   ,   ü   ,   ö   ,   ä   ,                              ,  F4   ,  F5   ,  F6   ,  F11  ,
+                       %   ,       ,       ,~(dead), PRINT ,                              ,  F1   ,  F2   ,  F3   ,  F10  ,
+*/
+#define LOWER_DM_L1 DM_DEG ,DM_MICR,DM_EURO, DM_AT , DM_SS ,                       _______, KC_F7 , KC_F8 , KC_F9 ,KC_F12 
+#define LOWER_DM_L2 DM_PIPE,DM_AMPR,DM_UDIA,DM_ODIA,DM_ADIA,                       _______, KC_F4 , KC_F5 , KC_F6 ,KC_F11 
+#define LOWER_DM_L3 DM_PERC,_______,_______,DM_TILD,KC_PSCR,                       _______, KC_F1 , KC_F2 , KC_F3 ,KC_F10 
+
+#define LOWER_DW_L1 DW_DEG ,DW_MICR,DW_EURO, DW_AT , DW_SS ,                       _______, KC_F7 , KC_F8 , KC_F9 ,KC_F12 
+#define LOWER_DW_L2 DW_PIPE,DW_AMPR,DW_UDIA,DW_ODIA,DW_ADIA,                       _______, KC_F4 , KC_F5 , KC_F6 ,KC_F11 
+#define LOWER_DW_L3 DW_PERC,_______,_______,DW_TILD,KC_PSCR,                       _______, KC_F1 , KC_F2 , KC_F3 ,KC_F10 
+
+/*
+ ADJUST
+*/
+#define ADJUST_L1 _______,_______,_______,_______,_______,                        _______, KC_F7 , KC_F8 , KC_F9 ,KC_F12
+#define ADJUST_L2 _______,OS_CHANGE,KC_BRIU,KC_VOLU,KC_MUTE,                      _______, KC_F4 , KC_F5 , KC_F6 ,KC_F11
+#define ADJUST_L3 _______,_______,KC_BRID,KC_VOLD,_______,                        _______, KC_F1 , KC_F2 , KC_F3 ,KC_F10
+
+
+
+
+
+
+
+
 enum os_t {
     _MAC,
     _WINDOWS,

@@ -18,6 +18,7 @@ You can request changes by making a fork and opening a [pull request](https://gi
 
 ## BLeeEZ Keyboards
 
+* [Common Layout File](/layouts/bleeez/common.c)
 * [Dactyl Manuform 5x6](/keyboards/handwired/dactyl_manuform/5x6/keymaps/bleeez)
 * [Skeletyl](/keyboards/bastardkb/skeletyl/keymaps/bleeez)
 

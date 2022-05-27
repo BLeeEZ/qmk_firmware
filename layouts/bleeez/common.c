@@ -175,7 +175,7 @@ enum custom_keycodes { QWERTZ = SAFE_RANGE, LOWER, RAISE, OS_CHANGE, ADJUST };
 #define RAI_SPC LT(_RAISE_MAC, KC_SPC)
 #define RAI_ESC LT(_RAISE_MAC, KC_ESC)
 #define RAI_BSPC LT(_RAISE_MAC, KC_BSPC)
-#define LOW_DEL LT(_LOWER_MAC, KC_DEL)
+#define LOW_ESC LT(_LOWER_MAC, KC_ESC)
 
 #define ADJ_DEL LT(_ADJUST, KC_DEL)
 #define RAI_DEL LT(_QWERTZ, KC_DEL)
@@ -204,14 +204,14 @@ enum custom_keycodes { QWERTZ = SAFE_RANGE, LOWER, RAISE, OS_CHANGE, ADJUST };
 
 #define TMB_RP  RAI_BSPC
 #define TMB_RA1 OSM(MOD_LSFT)
-#define TMB_RA2 LOW_DEL
+#define TMB_RA2 LOW_ESC
 
 /*
                            ,       ,       ,       ,       ,                               ,       ,       ,       ,       ,
                            ,       ,       ,       ,       ,                               ,       ,       ,       ,       ,
                            ,       ,       ,       ,       ,                               ,       ,       ,       ,       ,
 */
-#define ALPHA_L1     KC_Q  , KC_W  , KC_F  , KC_P  , KC_B ,                          KC_J  , KC_L  , KC_U  , KC_Z  , KC_ESC
+#define ALPHA_L1     KC_Q  , KC_W  , KC_F  , KC_P  , KC_B ,                          KC_J  , KC_L  , KC_U  , KC_Z  , KC_DEL
 #define ALPHA_L2     KC_A  ,LALT_T(KC_R),LGUI_T(KC_S),LCTL_T(KC_T),KC_G,             KC_M  ,RCTL_T(KC_N),RGUI_T(KC_E),RALT_T(KC_I), KC_O
 #define ALPHA_L3     KC_Y  , KC_X  , KC_C  , KC_D  , KC_V  ,                         KC_K  , KC_H  ,KC_COMM,KC_DOT ,KC_SLSH
 /*
@@ -329,7 +329,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             return false;
-        case LOW_DEL:
+        case LOW_ESC:
             if (record->tap.count) {
                 return true;
             } else if (record->event.pressed) {
